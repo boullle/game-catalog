@@ -2,26 +2,29 @@
 require_once __DIR__ . '/../services/games.php';
 require_once __DIR__ . '/../helpers/debug.php';
 final class AppController {
-    public function handleRequest(): void {
-        $page = $_GET['page'] ?? 'home';
-
-        switch($page) {
-            case 'home':
+    public function handleRequest(string $path): void {
+        if (preg_match('#^/games/(\d+)$#', $path, $m)) {
+        $this->gameById((int)$m[1]);
+        return;
+        }
+        switch($path) {
+            case '/':
                 //implement logic..
                 $this->home();
                 break;
-            case 'games':
+            case '/games':
                 $this->games();
                 break;
-            case 'detail':
-                $this->gameById();
-                break;
+            
             default:
                 //implement logic..
                 $this->notFound();
                 break;
         }
     }
+
+        
+    
 
     // créer une function render - view (string), data(array)
     private function render(string $view, array $data = []): void {
@@ -61,8 +64,8 @@ final class AppController {
         ]);
 
     }
-    private function gameById(): void {  
-        $id = $_GET['id'] ?? null;
+    private function gameById(int $id): void {  
+        
         $game = getGameById($id);
 
         http_response_code(200);
