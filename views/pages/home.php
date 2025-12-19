@@ -10,6 +10,7 @@ $total = $total ?? 0;
     <div class="meta">
         <span class="badge">Total: <?= (int)$total ?></span>
         <span class="badge">Featured: <?= count($games) ?></span>
+        <span class="badge"><a href="/random">Un jeu au hasard</a></span>
     </div>
 </section>
 
@@ -21,9 +22,8 @@ $total = $total ?? 0;
             <span class="badge"><?= $game['platform'] ?></span>
             <span class="badge"><?= $game['genre'] ?></span>
             <span class="badge"><?= (int)$game['releaseYear'] ?></span>
-            <span class="badge"><?= (int)$game['rating'] ?>/10</span>
+            <span class="badge"><a href="/games/<?= $game['id'] ?>">Naviguer vers le détail</a></span>
         </div>
-        <a href="/games/<?= $game['id'] ?>">Naviguer vers le détail</a>
  
     </article>
 <?php endforeach; ?>

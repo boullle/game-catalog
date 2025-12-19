@@ -23,3 +23,6 @@ function countAll():int{
 function getGameById(int $id):?array {
     return gameRepository()->findByID($id);
 }
+function getRandomGame():?array{
+    return gameRepository()->randomGame();
+}
