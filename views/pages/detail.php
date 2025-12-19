@@ -1,7 +1,12 @@
 <?php
 $game ??= [];
 $id ??=0;
+$success ??=false;
 ?>
+
+<?php if ($success): ?>
+    <h1><?= $success  ?></h1>
+<?php endif; ?>
 
 <?php if (!$game): ?>
     <h1>Le jeu demandé n'est pas trouvé</h1>
