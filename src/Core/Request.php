@@ -6,7 +6,7 @@
             $path=$_SERVER['REQUEST_URI'];
             return is_string($path) && $path !== '' ? $path : '/';
         }
-        private function method(): string
+        public function method(): string
         {
             return strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
         }
