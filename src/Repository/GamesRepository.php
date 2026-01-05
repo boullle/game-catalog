@@ -1,4 +1,6 @@
 <?php
+namespace Repository;
+use PDO;
 
 
 readonly final class GamesRepository {

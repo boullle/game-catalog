@@ -1,4 +1,7 @@
 <?php
+
+namespace Controller;
+
 require_once __DIR__ . '/../services/games.php';
 require_once __DIR__ . '/../helpers/debug.php';
 final class AppController
@@ -160,7 +163,6 @@ private function handleAddGame() : void {
 
     $newGameId = createGame($old);
     $_SESSION['flash_success']='Game added successfully';
-
     header('Location: /games/' . $newGameId, true, 302);
     exit;
 }
