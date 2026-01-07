@@ -19,7 +19,7 @@ readonly final class GamesRepository {
     // function qui va recuperer les 3 premiers jeux
 
     public function findTop($limit):array {
-        $sql = $this->pdo->prepare("SELECT * FROM games ORDER BY id ASC LIMIT :limit");//on ajoute du dynamisme avec le token limt
+        $sql = $this->pdo->prepare("SELECT * FROM games ORDER BY rating DESC LIMIT :limit");//on ajoute du dynamisme avec le token limt
         $sql->bindValue('limit',$limit,PDO::PARAM_INT);//on lie le token :limit à l'argument $limit
         $sql->execute();// on execute
         return $sql-> fetchAll(PDO::FETCH_ASSOC);// On retourne nos valeurs
@@ -36,9 +36,21 @@ readonly final class GamesRepository {
 
     }
 
+    public function findYounger($limit):array {
+        $sql = $this->pdo->prepare("SELECT * FROM games ORDER BY releaseYear DESC LIMIT :limit");//on ajoute du dynamisme avec le token limt
+        $sql->bindValue('limit',$limit,PDO::PARAM_INT);//on lie le token :limit à l'argument $limit
+        $sql->execute();// on execute
+        return $sql-> fetchAll(PDO::FETCH_ASSOC);// On retourne nos valeurs
+    }
+
     public function countAll():int{
         $sql = $this->pdo->query("SELECT COUNT(*) FROM games");
         return $sql->fetch(PDO::FETCH_COLUMN);
+    }
+
+     public function countByRating():array{
+        $sql = $this->pdo->query("SELECT rating, COUNT(*) AS total_games FROM games GROUP BY rating ORDER BY rating DESC");
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
     public function randomGame():?array{
     
